@@ -1,0 +1,20 @@
+import './row-movies-item.scss'
+
+const RowMoviesItem = ({ movie }) => {
+    return (
+        <div className='movieitem'>
+            <img src={movie.image} alt={movie.title} />
+            <h2>
+                {movie.title} &nbsp;
+                {movie.index + 1}
+            </h2>
+            <div className='movieitem-descr'>
+                <p>{movie.date}</p>
+                <div className='dot' />
+                <p>{movie.duration}m</p>
+            </div>
+        </div>
+    )
+}
+
+export default RowMoviesItem
