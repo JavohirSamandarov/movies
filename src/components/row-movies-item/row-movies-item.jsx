@@ -1,8 +1,8 @@
 import './row-movies-item.scss'
 
-const RowMoviesItem = ({ movie }) => {
+const RowMoviesItem = ({ movie, onToggleOpen }) => {
     return (
-        <div className='movieitem'>
+        <div className='movieitem' onClick={onToggleOpen}>
             <img src={movie.image} alt={movie.title} />
             <h2>
                 {movie.title} &nbsp;
