@@ -3,6 +3,7 @@ import { movies } from '../../constants'
 import MovieInfo from '../movie-info/movie-info'
 import RowMoviesItem from '../row-movies-item/row-movies-item'
 import './row-movies.scss'
+import 'react-responsive-modal/styles.css'
 import { Modal } from 'react-responsive-modal'
 
 class RowMovies extends React.Component {
