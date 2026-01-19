@@ -15,19 +15,19 @@ class MovieService {
 
     getPopularMovies = async () => {
         return this.getResource(
-            `${this._apiBase}/movie/popular?${this._apiLng}&${this._apiKey}`
+            `${this._apiBase}/movie/popular?${this._apiLng}&${this._apiKey}`,
         )
     }
 
     getTrandingMovies = async () => {
         return this.getResource(
-            `${this._apiBase}/movie/top_rated?${this._apiLng}&${this._apiKey}`
+            `${this._apiBase}/movie/top_rated?${this._apiLng}&${this._apiKey}`,
         )
     }
 
     getDetailedMovie = async (id) => {
         return this.getResource(
-            `${this._apiBase}/movie/${id}?${this._apiLng}&${this._apiKey}`
+            `${this._apiBase}/movie/${id}?${this._apiLng}&${this._apiKey}`,
         )
     }
 
