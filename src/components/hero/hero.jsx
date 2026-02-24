@@ -13,10 +13,12 @@ class Hero extends React.Component {
             error: false,
         }
         this.movieService = new MovieService()
-        this.getMovie()
+        this.updateMovie()
     }
 
-    getMovie = () => {
+    updateMovie = () => {
+        this.setState({loading:true})
+
         this.movieService
             .getRandomMovie()
             .then((res) => this.setState({ movie: res }))
@@ -43,7 +45,11 @@ class Hero extends React.Component {
                         iusto ratione, ullam dicta quis dolores. Deserunt,
                         officiis.
                     </p>
+                    <div>
                     <button className='btn btn-primary'>Details</button>
+                    <button className='btn btn-secondary' onClick={() => this.updateMovie()}>Random Movie</button>
+
+                    </div>
                 </div>
                 <div className='hero__movie'>
                     {errorContent}
@@ -68,10 +74,7 @@ const Content = ({ movie }) => {
                         ? `${movie.description.slice(0, 250)}...`
                         : movie.description}
                 </p>
-                <div>
-                    <button className='btn btn-secondary'>Random movie</button>
-                    <button className='btn btn-primary '>Details</button>
-                </div>
+                <button className='btn btn-primary '>Details</button>
             </div>
         </>
     )

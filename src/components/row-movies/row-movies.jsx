@@ -1,24 +1,44 @@
 import React from 'react'
-import { movies } from '../../constants'
 import MovieInfo from '../movie-info/movie-info'
 import RowMoviesItem from '../row-movies-item/row-movies-item'
 import './row-movies.scss'
 import 'react-responsive-modal/styles.css'
 import { Modal } from 'react-responsive-modal'
+import MovieService from '../../services/movie-service.js'
 
 class RowMovies extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            open: false,
-        }
+    state = {
+        open: false,
+        movies: [],
+        loading: true,
+        movieId: null,
+    }
+    movieService = new MovieService()
+
+    componentDidMount() {
+        this.getTrandingMovies()
     }
 
-    onToggleOpen = () => {
-        this.setState(({ open }) => ({ open: !open }))
+    onClose = () => {
+        this.setState({ open: false })
     }
+
+    onOpen = (id) => this.setState({ open: true, movieId: id })
+
+    getTrandingMovies = () => {
+        this.setState({ loading: true })
+        this.movieService
+            .getTrandingMovies()
+            .then((res) => this.setState({ movies: res, loading: false }))
+            .catch(() => this.setState({ loading: false }))
+    }
+
     render() {
-        const { open } = this.state
+        const { open, movies, loading, movieId } = this.state
+
+        const skeletons = [...Array(10)].map((_, index) => (
+            <RowMoviesItem key={index} isLoading={true} />
+        ))
         return (
             <div className='rowmovies'>
                 <div className='rowmovies__top'>
@@ -30,17 +50,20 @@ class RowMovies extends React.Component {
                     <a href='#'>See more</a>
                 </div>
                 <div className='rowmovies__lists'>
-                    {movies.map((movie, idx) => (
-                        <RowMoviesItem
-                            key={idx}
-                            movie={{ ...movie, index: idx }}
-                            onToggleOpen={this.onToggleOpen}
-                        />
-                    ))}
+                    {loading
+                        ? skeletons
+                        : movies.map((movie) => (
+                              <RowMoviesItem
+                                  key={movie.id}
+                                  movie={movie}
+                                  onOpen={this.onOpen}
+                                  isLoading={false}
+                              />
+                          ))}
                 </div>
 
-                <Modal open={open} onClose={this.onToggleOpen}>
-                    <MovieInfo />
+                <Modal open={open} onClose={this.onClose}>
+                    <MovieInfo movieId={movieId} />
                 </Modal>
             </div>
         )
@@ -48,3 +71,4 @@ class RowMovies extends React.Component {
 }
 
 export default RowMovies
+
