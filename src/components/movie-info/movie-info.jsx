@@ -65,15 +65,6 @@ const Content = ({ movie }) => {
             <div className='hero__movie-descr'>
                 <h2>{name}</h2>
                 <p>{movie.description}</p>
-
-                {/*<div className='movieitem-descr'>*/}
-                {/*    <img src='/date.svg' alt=''/>*/}
-                {/*    <p>{movie.release_date}</p>*/}
-                {/*    <div className='dot'/>*/}
-                {/*    <p>{movie.vote_average.toFixed(1)}</p>*/}
-                {/*    <img src='/star.svg' alt=''/>*/}
-                {/*</div>*/}
-
             </div>
         </>
     )
